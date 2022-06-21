@@ -2,13 +2,17 @@
 // Actor is the jumper sprite
 using System;
 
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
-    internal class Program
+    public class Actor
     {
-        static void Main(string[] args)
+        public Actor()
         {
-            Console.WriteLine("Hello World!");
+        }
+
+        public void CreateActor()
+        {
+
         }
     }
 }
