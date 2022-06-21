@@ -1,13 +1,18 @@
 // Service is random word generator
 using System;
 
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
-    internal class Program
+    public class Service
     {
-        static void Main(string[] args)
+        public string word;
+        public Service()
         {
-            Console.WriteLine("Hello World!");
+
+        }
+        public void GenerateWord()
+        {
+            
         }
     }
 }
