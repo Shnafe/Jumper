@@ -10,7 +10,6 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
         public string randomWord;
         public Service()
         {
-
         }
 
         public void InitWords()
@@ -37,17 +36,17 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
         {
             var randomChoice = new Random();
             int randomIndex = randomChoice.Next(wordChoices.Count);
-            string randomWord = wordChoices[randomIndex];
+            randomWord = wordChoices[randomIndex];
         }
 
-        public void GenerateLine()
+        public void DrawLine()
         {
             string[] lines = {};
             List<string> letterLines = new List<string>(lines);
             int numLines = randomWord.Length;
             for (int i = 0; i < numLines; i++)
             {
-                
+                letterLines.Add("_ ");
             }
         }
     }
