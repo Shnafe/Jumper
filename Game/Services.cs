@@ -11,7 +11,8 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
         {
 
         }
-        public void GenerateWord()
+
+        public void InitWords()
         {
             string[] words = 
             {
@@ -29,6 +30,11 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
             
             List<string> wordChoices = new List<string>(words);
+        }
+
+        public void GenerateWord()
+        {
+            
 
         }
     }
