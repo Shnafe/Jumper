@@ -11,8 +11,11 @@ namespace Jumper.Game
     // </summary>
     public class Director
     {
-        int totalScore = 300;
-        Card card = new Card();
+        bool firstPlay = true;
+        bool isPlaying = true;
+        string choiceLetter = "";
+        Actor actor = new Actor();
+        Service service = new Service();
         bool guessIsHigher = false;
 
         // <summary>
@@ -20,7 +23,7 @@ namespace Jumper.Game
         // </summary>
         public Director()
         {
-            card.Draw();
+            actor.DrawPerson();
         }
 
         // <summary>
@@ -28,6 +31,7 @@ namespace Jumper.Game
         // </summary>
         public void StartGame()
         {
+            
             while (isPlaying)
             {
                 GetInputs();
@@ -41,90 +45,30 @@ namespace Jumper.Game
         // </summary>
         public void GetInputs()
         {   
-            if (!firstPlay)
+            if (firstPlay)
             {
-                // Ask user to play again.
-                Console.Write("Play again? [y/n] ");
-
-                // If the users says no end game.
-                isPlaying = (Console.ReadLine() == "y");
-            }
-            else {
-                firstPlay = false;
-            }
-
-            if (!isPlaying) {
                 return;
             }
-
-            // Print card name so that user can make a guess.
-            Console.WriteLine($"\nThe card is: {card.name}.");
-
-            // GET guess.
-            Console.Write("Higher or lower? [h/l] ");            
-            guessIsHigher = (Console.ReadLine() == "h");
+            
+            choiceLetter = Console.ReadLine();
         }
 
-        // <summary>
-        // Updates the player's score.
-        // </summary>
+        // Services file
         public void DoUpdates()
         {   
-            // If game is over end game.
-            if (!isPlaying)
+            if (firstPlay)
             {
-                return;
+                service.GenerateWord();
             }
-            
-            // Create variable to store last card value before changed.
-            int lastValue = card.value;
-
-            // Generate new card value.
-            card.Draw();
-
-            // Find out if guess was correct or not.
-            bool valueIsHigher = (card.value > lastValue);
-
-            // Use an xor to figure out player points. 
-            int points = 0;
-
-            if (valueIsHigher ^ guessIsHigher) {
-
-                // Incorrect guess.
-                points = -75;
-
-            } else {
-                
-                // Correct guess.
-                points = 100;
-            }
-
-            // Add points to total score.
-            totalScore += points;
-            
+            service.DrawLine();
+            actor.DrawParachute();
+            actor.DrawPerson();
         }
 
-        // <summary>
-        // Displays the next card and the score.  
-        // </summary>
+        // Actor file
         public void DoOutputs()
         {   
-            // If game is over end game.
-            if (!isPlaying)
-            {
-                return;
-            }
-
-            // Output to user.
-            Console.WriteLine($"Next card was: {card.name}");
-            Console.WriteLine($"Your score is: {totalScore}");
-
-            // Check end game conditions.
-            isPlaying = (totalScore > 0);
-
-            if (!isPlaying)
-            {
-                Console.WriteLine("Game Over");
-            }
+            
         }
     }
+}
