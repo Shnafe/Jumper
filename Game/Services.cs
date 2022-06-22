@@ -6,7 +6,8 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
     public class Service
     {
-        public string word;
+        public List<string> wordChoices;
+        public string randomWord;
         public Service()
         {
 
@@ -14,7 +15,8 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
         public void InitWords()
         {
-                        string[] words = 
+            
+            string[] words = 
             {
                 "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child",
                 "world", "school", "state", "family", "student", "group", "country", "problem", "hand", "part",
@@ -28,13 +30,25 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
                 "morning", "reason", "research", "girl", "guy", "moment", "air", "teacher", "force", "education"
             };
 
-            
             List<string> wordChoices = new List<string>(words);
         }
 
         public void GenerateWord()
         {
-        
+            var randomChoice = new Random();
+            int randomIndex = randomChoice.Next(wordChoices.Count);
+            string randomWord = wordChoices[randomIndex];
+        }
+
+        public void GenerateLine()
+        {
+            string[] lines = {};
+            List<string> letterLines = new List<string>(lines);
+            int numLines = randomWord.Length;
+            for (int i = 0; i < numLines; i++)
+            {
+                
+            }
         }
     }
 }

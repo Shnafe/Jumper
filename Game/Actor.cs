@@ -10,9 +10,15 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
         {
         }
 
-        public void CreateActor()
+        public void DrawParachute()
+        {
+            
+        }
+
+        public void DrawPerson()
         {
 
         }
+        
     }
 }

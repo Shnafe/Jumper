@@ -11,8 +11,9 @@ namespace Jumper.Game
     // </summary>
     public class Director
     {
+        bool isPlaying = true;
         int totalScore = 300;
-        Card card = new Card();
+        Actor actor = new Actor();
         bool guessIsHigher = false;
 
         // <summary>
@@ -20,7 +21,7 @@ namespace Jumper.Game
         // </summary>
         public Director()
         {
-            card.Draw();
+            actor.Draw();
         }
 
         // <summary>
@@ -41,28 +42,7 @@ namespace Jumper.Game
         // </summary>
         public void GetInputs()
         {   
-            if (!firstPlay)
-            {
-                // Ask user to play again.
-                Console.Write("Play again? [y/n] ");
-
-                // If the users says no end game.
-                isPlaying = (Console.ReadLine() == "y");
-            }
-            else {
-                firstPlay = false;
-            }
-
-            if (!isPlaying) {
-                return;
-            }
-
-            // Print card name so that user can make a guess.
-            Console.WriteLine($"\nThe card is: {card.name}.");
-
-            // GET guess.
-            Console.Write("Higher or lower? [h/l] ");            
-            guessIsHigher = (Console.ReadLine() == "h");
+            string choiceLetter = Console.ReadLine();
         }
 
         // <summary>
