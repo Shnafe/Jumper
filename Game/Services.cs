@@ -34,9 +34,7 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
         public void GenerateWord()
         {
-<<<<<<< HEAD
-            
-=======
+
             var randomChoice = new Random();
             int randomIndex = randomChoice.Next(wordChoices.Count);
             randomWord = wordChoices[randomIndex];
@@ -51,7 +49,6 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             {
                 letterLines.Add("_ ");
             }
->>>>>>> 0e87c36bf6b54646957099bc780b9cf882cf1052
         }
     }
 }
