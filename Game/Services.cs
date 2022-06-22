@@ -14,7 +14,7 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
         public void InitWords()
         {
-            string[] words = 
+                        string[] words = 
             {
                 "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child",
                 "world", "school", "state", "family", "student", "group", "country", "problem", "hand", "part",
@@ -34,10 +34,7 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
         public void GenerateWord()
         {
-            
-
-            
-
+        
         }
     }
 }
