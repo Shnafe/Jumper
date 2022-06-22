@@ -11,8 +11,6 @@ namespace Jumper.Game
     // </summary>
     public class Director
     {
-        bool firstPlay = true;
-        bool isPlaying = true;
         int totalScore = 300;
         Card card = new Card();
         bool guessIsHigher = false;
