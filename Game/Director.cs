@@ -12,18 +12,16 @@ namespace Jumper.Game
     public class Director
     {
         bool firstPlay = true;
-        bool isPlaying = true;
-        string choiceLetter = "";
+        public char choiceLetter;
         Actor actor = new Actor();
         Service service = new Service();
-        bool guessIsHigher = false;
+        public bool lostGame = false;
 
         // <summary>
         // Constructs a new instance of Director.
         // </summary>
         public Director()
         {
-            actor.DrawPerson();
         }
 
         // <summary>
@@ -31,8 +29,7 @@ namespace Jumper.Game
         // </summary>
         public void StartGame()
         {
-            
-            while (isPlaying)
+            while (!(lostGame))
             {
                 GetInputs();
                 DoUpdates();
@@ -50,25 +47,28 @@ namespace Jumper.Game
                 return;
             }
             
-            choiceLetter = Console.ReadLine();
+            Console.Write("Guess a letter [a-z]: ");
+            string userInput = Console.ReadLine();
+            choiceLetter = char.Parse(userInput);
         }
 
         // Services file
         public void DoUpdates()
         {   
             if (firstPlay)
-            {
+            {   
                 service.GenerateWord();
+                firstPlay = false;
             }
-            service.DrawLine();
-            actor.DrawParachute();
-            actor.DrawPerson();
+            service.CreateLine();
         }
 
         // Actor file
         public void DoOutputs()
         {   
-            
+            actor.DrawParachute();
+            actor.DrawPerson();
+            actor.DrawTrees();
         }
     }
 }

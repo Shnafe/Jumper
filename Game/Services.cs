@@ -6,8 +6,12 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
     public class Service
     {
+        Director director = new Director();
         public List<string> wordChoices;
+        public List<string> letterLines;
+        public List<char> letters;
         public string randomWord;
+
         public Service()
         {
         }
@@ -40,7 +44,13 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             randomWord = wordChoices[randomIndex];
         }
 
-        public void DrawLine()
+        public void SplitWord()
+        {
+            letters = new List<char>();
+            letters.AddRange(randomWord);
+        }
+
+        public void CreateLine()
         {
             string[] lines = {};
             List<string> letterLines = new List<string>(lines);
@@ -48,6 +58,17 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             for (int i = 0; i < numLines; i++)
             {
                 letterLines.Add("_ ");
+            }
+        }
+
+        public void GuessLetter()
+        {
+            for (int i = -1; i < letters.Count; i++)
+            {
+                if (letters[i] == director.choiceLetter)
+                {
+                    
+                }
             }
         }
     }
