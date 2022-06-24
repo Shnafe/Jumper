@@ -4,15 +4,18 @@ using System.Collections.Generic;
 
 namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
-    public class Service
+    public class Services
     {
         Director director = new Director();
         public List<string> wordChoices;
         public List<string> letterLines;
         public List<char> letters;
         public string randomWord;
+        bool guessedCorrectly = false;
+        
+        public int guessesWrong = 0;
 
-        public Service()
+        public Services()
         {
         }
 
@@ -67,8 +70,15 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             {
                 if (letters[i] == director.choiceLetter)
                 {
-                    
+                    string correctGuess = director.choiceLetter.ToString();
+                    letterLines[i] = $"{correctGuess} ";
+                    guessedCorrectly = true;
                 }
+            }
+
+            if (!(guessedCorrectly))
+            {
+                guessesWrong += 1;
             }
         }
     }

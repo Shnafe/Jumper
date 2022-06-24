@@ -6,16 +6,24 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
     public class Actor
     {
-        int guessesWrong = 0;
         Director director = new Director();
+        Services services = new Services();
 
         public Actor()
         {
         }
 
+        public void DrawLine()
+        {
+            for (int i = 0; i < services.letterLines.Count; i++)
+            {
+                Console.Write(services.letterLines[i]);
+            }
+        }
+
         public void DrawParachute()
         {
-            switch(guessesWrong)
+            switch(services.guessesWrong)
             {
                 case 0:
                     Console.WriteLine("");

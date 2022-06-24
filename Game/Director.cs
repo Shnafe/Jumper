@@ -13,8 +13,6 @@ namespace Jumper.Game
     {
         bool firstPlay = true;
         public char choiceLetter;
-        Actor actor = new Actor();
-        Service service = new Service();
         public bool lostGame = false;
 
         // <summary>
@@ -31,15 +29,15 @@ namespace Jumper.Game
         {
             while (!(lostGame))
             {
+                
+                Console.WriteLine("Here");
                 GetInputs();
                 DoUpdates();
                 DoOutputs();
             }
         }
 
-        // <summary>
-        // Asks the user if they want to play again and their guess.
-        // </summary>
+    
         public void GetInputs()
         {   
             if (firstPlay)
@@ -52,20 +50,29 @@ namespace Jumper.Game
             choiceLetter = char.Parse(userInput);
         }
 
-        // Services file
+
         public void DoUpdates()
         {   
+            Services services = new Services();
+            
             if (firstPlay)
             {   
-                service.GenerateWord();
+                services.GenerateWord();
+                services.SplitWord();
+                services.CreateLine();
                 firstPlay = false;
+                return;
             }
-            service.CreateLine();
+            
+            services.GuessLetter();
         }
 
-        // Actor file
+
         public void DoOutputs()
         {   
+            Actor actor = new Actor();
+            
+            actor.DrawLine();
             actor.DrawParachute();
             actor.DrawPerson();
             actor.DrawTrees();
