@@ -41,7 +41,7 @@ namespace Jumper.Game
         }
 
     
-        public void GetInputs()
+        private void GetInputs()
         {   
             // If its first turn do nothing.
             if (firstPlay)
@@ -58,7 +58,7 @@ namespace Jumper.Game
 
         }
 
-        public void DoUpdates()
+        private void DoUpdates()
         {   
             if (firstPlay){
                 firstPlay = false;
@@ -68,7 +68,7 @@ namespace Jumper.Game
             services.checkGuess(userGuess);
         }
 
-        public void DoOutputs()
+        private void DoOutputs()
         {   
             actor.DrawOutput();
 

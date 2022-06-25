@@ -74,7 +74,7 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             
         }
 
-        public void DrawPerson(bool lostGame)
+        private void DrawPerson(bool lostGame)
         {
             if (lostGame)
             {
@@ -90,7 +90,7 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             
         }
 
-        public void DrawTrees()
+        private void DrawTrees()
         {
             Console.WriteLine("^^^^^^^");
         }

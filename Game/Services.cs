@@ -43,7 +43,6 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 
              wordBank = words;
         }
-
         private void GetRandomWord()
         {
 
