@@ -78,15 +78,15 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
         {
             if (lostGame)
             {
-                Console.WriteLine(" X");
-                Console.WriteLine(@"/|\");
-                Console.WriteLine(@"/ \");
+                Console.WriteLine("  X");
+                Console.WriteLine(@" /|\");
+                Console.WriteLine(@" / \");
                 return;
             }
             
-            Console.WriteLine(" O");
-            Console.WriteLine(@"/|\");
-            Console.WriteLine(@"/ \");
+            Console.WriteLine("  O");
+            Console.WriteLine(@" /|\");
+            Console.WriteLine(@" / \");
             
         }
 
