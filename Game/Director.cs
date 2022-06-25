@@ -12,14 +12,18 @@ namespace Jumper.Game
     public class Director
     {
         bool firstPlay = true;
-        public char choiceLetter;
-        public bool lostGame = false;
+        public char userGuess;
+        public bool gameEnd = false;
+        Services services = new Services();
+        
+        Actor actor;
 
         // <summary>
         // Constructs a new instance of Director.
         // </summary>
         public Director()
         {
+            actor = new Actor(services);
         }
 
         // <summary>
@@ -27,10 +31,9 @@ namespace Jumper.Game
         // </summary>
         public void StartGame()
         {
-            while (!(lostGame))
+            // Loop while game is running.
+            while (!(gameEnd))
             {
-                
-                Console.WriteLine("Here");
                 GetInputs();
                 DoUpdates();
                 DoOutputs();
@@ -40,42 +43,36 @@ namespace Jumper.Game
     
         public void GetInputs()
         {   
+            // If its first turn do nothing.
             if (firstPlay)
             {
                 return;
             }
             
+            // Ask user for their guess. 
             Console.Write("Guess a letter [a-z]: ");
-            string userInput = Console.ReadLine();
-            choiceLetter = char.Parse(userInput);
-        }
 
+            // Read in the users input then parse from string to char.
+            string tempUserInput = Console.ReadLine();
+            userGuess = char.Parse(tempUserInput);
+
+        }
 
         public void DoUpdates()
         {   
-            Services services = new Services();
-            
-            if (firstPlay)
-            {   
-                services.GenerateWord();
-                services.SplitWord();
-                services.CreateLine();
+            if (firstPlay){
                 firstPlay = false;
                 return;
             }
-            
-            services.GuessLetter();
-        }
 
+            services.checkGuess(userGuess);
+        }
 
         public void DoOutputs()
         {   
-            Actor actor = new Actor();
-            
-            actor.DrawLine();
-            actor.DrawParachute();
-            actor.DrawPerson();
-            actor.DrawTrees();
+            actor.DrawOutput();
+
+            gameEnd = services.checkForCompleteAnswer() || services.checkLossCondition();
         }
     }
 }

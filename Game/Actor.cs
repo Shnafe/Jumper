@@ -6,24 +6,44 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
     public class Actor
     {
-        Director director = new Director();
-        Services services = new Services();
+        // Director director = new Director();
+        Services services;
+        
 
-        public Actor()
+        public Actor(Services services)
         {
+            setServices(services);
         }
 
-        public void DrawLine()
+        private void setServices(Services servicesInstance){
+
+            services = servicesInstance;
+        }
+
+        public void DrawOutput () {
+            DrawLine();
+            DrawParachute();
+
+            bool lostGame = services.checkLossCondition();
+
+            DrawPerson(lostGame);
+            
+            DrawTrees();
+        }
+
+        private void DrawLine()
         {
-            for (int i = 0; i < services.letterLines.Count; i++)
+            for (int i = 0; i < services.currentProgress.Length; i++)
             {
-                Console.Write(services.letterLines[i]);
+                Console.Write($"{services.currentProgress[i]} ");
             }
+
+            Console.WriteLine();
         }
 
-        public void DrawParachute()
+        private void DrawParachute()
         {
-            switch(services.guessesWrong)
+            switch(services.numWrongGuesses)
             {
                 case 0:
                     Console.WriteLine("");
@@ -54,9 +74,9 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
             
         }
 
-        public void DrawPerson()
+        public void DrawPerson(bool lostGame)
         {
-            if (director.lostGame)
+            if (lostGame)
             {
                 Console.WriteLine(" X");
                 Console.WriteLine(@"/|\");

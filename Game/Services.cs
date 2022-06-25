@@ -6,20 +6,25 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
 {
     public class Services
     {
-        Director director = new Director();
-        public List<string> wordChoices;
-        public List<string> letterLines;
-        public List<char> letters;
-        public string randomWord;
-        bool guessedCorrectly = false;
+        // Declare Variables. 
+        private string[] wordBank;
+        private string randomWord;
+        public string currentProgress;
+        public int numWrongGuesses = 0;
         
-        public int guessesWrong = 0;
 
+        // Builds class instance.
         public Services()
         {
+            // Build word bank.
+            InitWords();
+            //Get a random word.
+            GetRandomWord();
+            // Provide an initial value for guess progress.
+            InitCurrentProgress();
         }
 
-        public void InitWords()
+        private void InitWords()
         {
             
             string[] words = 
@@ -36,50 +41,95 @@ namespace Jumper.Game // Note: actual namespace depends on the project name.
                 "morning", "reason", "research", "girl", "guy", "moment", "air", "teacher", "force", "education"
             };
 
-            List<string> wordChoices = new List<string>(words);
+             wordBank = words;
         }
 
-        public void GenerateWord()
+        private void GetRandomWord()
         {
 
-            var randomChoice = new Random();
-            int randomIndex = randomChoice.Next(wordChoices.Count);
-            randomWord = wordChoices[randomIndex];
+            Random randomChoice = new Random();
+            int randomIndex = randomChoice.Next(0, wordBank.Length);
+            randomWord = wordBank[randomIndex];
         }
 
-        public void SplitWord()
-        {
-            letters = new List<char>();
-            letters.AddRange(randomWord);
-        }
 
-        public void CreateLine()
+        private void InitCurrentProgress()
         {
-            string[] lines = {};
-            List<string> letterLines = new List<string>(lines);
-            int numLines = randomWord.Length;
-            for (int i = 0; i < numLines; i++)
+            for (int i = 0; i < randomWord.Length; i++)
             {
-                letterLines.Add("_ ");
+                currentProgress += "_";
             }
         }
 
-        public void GuessLetter()
+        public void checkGuess(char userGuess)
         {
-            for (int i = -1; i < letters.Count; i++)
+            bool guessedCorrectly = false;
+
+            for (int i = 0; i < randomWord.Length; i++)
             {
-                if (letters[i] == director.choiceLetter)
-                {
-                    string correctGuess = director.choiceLetter.ToString();
-                    letterLines[i] = $"{correctGuess} ";
+                if (randomWord[i] == userGuess)
+                {   
+                    setCurrentProgress(userGuess);
                     guessedCorrectly = true;
                 }
             }
 
             if (!(guessedCorrectly))
             {
-                guessesWrong += 1;
+                numWrongGuesses += 1;
             }
+        }
+
+        private void setCurrentProgress(char userGuess){
+            
+
+            // Temporary array to hold guess information.
+            char[] tempPlaceHolder = new char[randomWord.Length];
+
+            for (int i = 0; i < randomWord.Length; i++){
+                
+                // If the answer at the index is not the guess fill with old progress.
+                if (userGuess != randomWord[i]) {
+
+                    tempPlaceHolder[i] = currentProgress[i];
+
+                }
+                // Else fill in with the guess.
+                else {
+
+                    tempPlaceHolder[i] = userGuess;
+                }
+
+            }
+
+            // Put the final guess progress into a string.
+            currentProgress = new string ( tempPlaceHolder);
+            
+        }
+
+        public bool checkLossCondition () {
+            
+            if (numWrongGuesses >= 4) {
+                return true;
+
+            } else {
+                return false;
+            }
+        }
+
+        public bool checkForCompleteAnswer() {
+
+            bool gotAnswer = true;
+
+            for(int i = 0; i < currentProgress.Length; i++){
+
+                if (currentProgress[i] == '_'){
+
+                    gotAnswer = false;
+                }
+            }
+
+            return gotAnswer;
         }
     }
 }
